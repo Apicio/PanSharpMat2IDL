@@ -12,5 +12,21 @@ ms3 = GEOTIFF_READ(path5);
 path6 = '../Dataset/EO1A1750842002090110PY_B06_L1T.TIF';
 ms4 = GEOTIFF_READ(path6);
 
-imshow(flipud(pan.z), 'xdata', pan.x, 'ydata', pan.y);
 
+[A, R] = geotiffread(path6);
+figure
+mapshow(A, R);
+axis image off
+
+
+% sdID = sd.start('dataset.hdf','create');
+% ds_name = 'PAN';
+% ds_type = 'double';
+
+
+
+
+figure
+imshow(flipud(pan.z), 'xdata', pan.x, 'ydata', pan.y);
+figure
+imshow(flipud(ms1p.z), 'xdata', ms1p.x, 'ydata', ms1p.y);
