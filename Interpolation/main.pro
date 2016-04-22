@@ -28,10 +28,12 @@ transformed_REDIMAGE = fft(REDIMAGE, -1)
 ;;;;;;;;;;;;;;;;;;; ;H = [N*ones(1,L/N),zeros(1,2*L/N),N*ones(1,L/N)];
 ;; Ricostruzione ;; ;XRIC = XESP.*H;
 ;;;;;;;;;;;;;;;;;;; ;xRic = ifft(XRIC);
-H1 = (intarr(192,192)+1)*N;
-H0_1 = intarr(384,192)
-H0_2 = intarr(192,384)
-H0_3 = intarr(384,384)
+dim1 = 128
+dim2 = 512
+H1 = (intarr(dim1,dim1)+1)*N;
+H0_1 = intarr(dim2,dim1)
+H0_2 = intarr(dim1,dim2)
+H0_3 = intarr(dim2,dim2)
 H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] 
 transformed_UVIMAGE_RIC = transformed_UVIMAGE*H
 transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
@@ -46,4 +48,6 @@ GREENIMAGERIC = fft(transformed_GREENIMAGE_RIC, 1)
 im = IMAGE(GREENIMAGERIC)
 REDIMAGERIC = fft(transformed_REDIMAGE_RIC, 1) 
 im = IMAGE(REDIMAGERIC)  
+
+SAVE, FILENAME = PATH_TO_SAVE_RIC+'data_interpolated.sav', im1CropPAN, UVIMAGERIC, BLUIMAGERIC, GREENIMAGERIC, REDIMAGERIC
 end
