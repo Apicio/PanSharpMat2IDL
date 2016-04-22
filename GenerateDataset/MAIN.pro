@@ -55,9 +55,9 @@ hdf_sd_end, hdfid
 
 im1Crop.GetData,im1CropPAN
 im2Crop.GetData,im2CropMS1p
-im3Crop.GetData,im3CropMS2
-im4Crop.GetData,im4CropMS3
-im5Crop.GetData,im5CropMS4
+im3Crop.GetData,im3CropMS1
+im4Crop.GetData,im4CropMS2
+im5Crop.GetData,im5CropMS3
 
-SAVE, FILENAME = PATH_TO_SAVE+'data.sav', im1CropPAN, im2CropMS1p, im3CropMS2, im4CropMS3,im5CropMS4
+SAVE, FILENAME = PATH_TO_SAVE+'data.sav', im1CropPAN, im2CropMS1p, im3CropMS1, im4CropMS2,im5CropMS3
 end
