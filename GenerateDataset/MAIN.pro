@@ -1,5 +1,5 @@
-PATH = 'C:\Users\Leonardo\Dropbox\Magistrale\Telerilevamento\ProgettoPanSharp\dataset.hdf';
-HDFID = hdf_sd_start(PATH)
+@paths.pro
+HDFID = hdf_sd_start(PATH_TO_DB)
 hdf_sd_fileinfo, HDFID, nvars, ngatts
 varnames=NomiVariabiliHDF(hdfid)
 cutDim = [256*3, 256*3]
@@ -59,7 +59,5 @@ im3Crop.GetData,im3CropMS2
 im4Crop.GetData,im4CropMS3
 im5Crop.GetData,im5CropMS4
 
-;SAVE, FILENAME = 'C:\Users\Leonardo\Dropbox\Magistrale\Telerilevamento\ProgettoPanSharp\dati.sav', im1CropPAN, im2CropMS1p, im3CropMS2, im4CropMS3,im5CropMS4
-
-
+SAVE, FILENAME = PATH_TO_SAVE+'data.sav', im1CropPAN, im2CropMS1p, im3CropMS2, im4CropMS3,im5CropMS4
 end

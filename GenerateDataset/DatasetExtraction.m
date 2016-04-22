@@ -1,24 +1,16 @@
 clc; clear all; close all;
 import matlab.io.hdf4.*
-
-path1 = '../Dataset/EO1A1750842002090110PY_B01_L1T.TIF'; % PAN
-pan = GEOTIFF_READ(path1);
-path2 = '../Dataset/EO1A1750842002090110PY_B02_L1T.TIF'; % UV
-ms1p = GEOTIFF_READ(path2);
-path3 = '../Dataset/EO1A1750842002090110PY_B03_L1T.TIF'; % BLU
-ms1 = GEOTIFF_READ(path3);
-path4 = '../Dataset/EO1A1750842002090110PY_B04_L1T.TIF'; % VERDE
-ms2 = GEOTIFF_READ(path4);
-path5 = '../Dataset/EO1A1750842002090110PY_B05_L1T.TIF'; % ROSSO
-ms3 = GEOTIFF_READ(path5);
-% path6 = '../Dataset/EO1A1750842002090110PY_B06_L1T.TIF';
-% ms4 = GEOTIFF_READ(path6);
-
-% [A, R] = geotiffread(path1);
-% figure
-% mapshow(A, R);
-% axis image off
-
+paths %% File da creare con i percorsi al dataset
+% path1 = '../Dataset/EO1A1750842002090110PY_B01_L1T.TIF';
+% path2 = '../Dataset/EO1A1750842002090110PY_B02_L1T.TIF'; 
+% path3 = '../Dataset/EO1A1750842002090110PY_B03_L1T.TIF'; 
+% path4 = '../Dataset/EO1A1750842002090110PY_B04_L1T.TIF'; 
+% path5 = '../Dataset/EO1A1750842002090110PY_B05_L1T.TIF'; 
+pan = GEOTIFF_READ(path1); % PAN
+ms1p = GEOTIFF_READ(path2); % UV
+ms1 = GEOTIFF_READ(path3); % BLU
+ms2 = GEOTIFF_READ(path4); % VERDE
+ms3 = GEOTIFF_READ(path5); % ROSSO
 %% Creazione HDF4 - Usa SD API. 
 % Struttura:
 %        ___________
@@ -28,6 +20,7 @@ ms3 = GEOTIFF_READ(path5);
 %    SDS1 SDS2     SDSn
 %
 sdID = sd.start('dataset.hdf','create');
+
 %PAN_SDS1
 ds_name = 'PAN_x_coords';
 ds_type = 'double';
@@ -284,8 +277,7 @@ ds_dims = size(toWrite);
 sdsID = sd.create(sdID,ds_name,ds_type,ds_dims);
 start = [0 0];
 sd.writeData(sdsID,start,toWrite);
-  sd.endAccess(sdsID);
-
+sd.endAccess(sdsID);
 
 %Chiudere lo SD
 sd.close(sdID);
