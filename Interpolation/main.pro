@@ -34,13 +34,14 @@ H1 = (intarr(dim1,dim1)+1)*N;
 H0_1 = intarr(dim2,dim1)
 H0_2 = intarr(dim1,dim2)
 H0_3 = intarr(dim2,dim2)
-H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] 
-transformed_UVIMAGE_RIC = transformed_UVIMAGE*H
+H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
+ 
+transformed_UVIMAGE_RIC = transformed_UVIMAGE*H ;prodotto elemento per elemento
 transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
 transformed_GREENIMAGE_RIC = transformed_GREENIMAGE*H
 transformed_REDIMAGE_RIC = transformed_REDIMAGE*H
 
-UVIMAGERIC = fft(transformed_UVIMAGE_RIC, 1)
+UVIMAGERIC = fft(transformed_UVIMAGE_RIC, 1) ; anti trasformata
 im = IMAGE(UVIMAGERIC) 
 BLUIMAGERIC = fft(transformed_BLUIMAGE_RIC, 1)
 im = IMAGE(BLUIMAGERIC)
