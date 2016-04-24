@@ -10,8 +10,8 @@ Rangey = 5  ;range Coloumn of search alignment
 
 ; per verificare il corretto funzionamento dell'algoritmo modificare i seguenti parametri, 
 ; vanno a selezionare uno shift in modo da simulare lo sfasamento
-debug_shift_y  =0
-debug_shift_x = 0
+debug_shift_y  =0;in colonne
+debug_shift_x = 0 ;in righe
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 imgPan_cut = im1CropPAN[Start+debug_shift_y:Finish+debug_shift_y,Start+debug_shift_x:Finish+debug_shift_x] ;cut ImagePan
 Q_indexs = dblarr(Rangey*2+1,Rangex*2+1) ;colonne, righe
@@ -28,12 +28,14 @@ endfor
 max_Q = max(Q_indexs) ; prendiamo il valore per il quale l'indice risulta massimo
 print,'Quality of image: ', max_Q
 index = where(Q_indexs eq max_Q) ; gestisce le matrici come un unico array ottenuto concatenando le righe, l'indice è restituito nell'intervallo [0, (2*Rangey+1)*(2*Rangex+1)-1]
-i = index MOD (Rangex*2+1) ; operatore modulo con n° Righe
-j = index - (Rangey*2+1)*i ; index = i*n°Colonne + j
+i = index MOD (Rangey*2+1) ; operatore modulo con n° Righe
+j = index/(Rangey*2+1) ; index = i*n°Colonne + j
+
+print, max_Q(j,i)
 
 ;Calcolo Errore
-print, 'Errore: NRiga:   ',i-Rangex
-print, 'Errore: NColonna:',j-Rangey
+print, 'Errore: NColonna:   ',i-Rangey
+print, 'Errore: NRiga:      ',j-Rangex
 
 ;;;;;;;;;;;;;; immagine fusa;;;;
 out=indgen(Finish-Start+1,Finish-Start+1,3)
