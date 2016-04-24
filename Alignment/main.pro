@@ -33,12 +33,13 @@ index=where(Q_indexs eq max_Q)
 i=index/(Rangey*2+1)
 j=index-(Rangey*2+1)*i
 ;Calcolo Errore
-print, 'Errore: NRiga:',i-Rangex, 'NColonna:',j-Rangey
-
+print, 'Errore: NRiga:   ',i-Rangex
+print, 'Errore: NColonna:',j-Rangey
 
 ;;;;;;;;;;;;;; immagine fusa;;;;
-out[*,*,0]=imgRed;
-out[*,*,1]=imgGreen;
-out[*,*,2]=imgPan;
+out=indgen(Finish-Start+1,Finish-Start+1,3)
+out[*,*,0]=REDIMAGERIC[Start:Finish,Start:Finish]
+out[*,*,1]=GREENIMAGERIC[Start:Finish,Start:Finish]
+out[*,*,2]=im1CropPAN[Start:Finish,Start:Finish]
 ;image(out)
 end
