@@ -41,13 +41,13 @@ transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
 transformed_GREENIMAGE_RIC = transformed_GREENIMAGE*H
 transformed_REDIMAGE_RIC = transformed_REDIMAGE*H
 
-UVIMAGERIC = fft(transformed_UVIMAGE_RIC, 1) ; anti trasformata
+UVIMAGERIC = REAL_PART(fft(transformed_UVIMAGE_RIC, 1)) ; anti trasformata
 im = IMAGE(UVIMAGERIC) 
-BLUIMAGERIC = fft(transformed_BLUIMAGE_RIC, 1)
+BLUIMAGERIC = REAL_PART(fft(transformed_BLUIMAGE_RIC, 1))
 im = IMAGE(BLUIMAGERIC)
-GREENIMAGERIC = fft(transformed_GREENIMAGE_RIC, 1)
+GREENIMAGERIC = REAL_PART(fft(transformed_GREENIMAGE_RIC, 1))
 im = IMAGE(GREENIMAGERIC)
-REDIMAGERIC = fft(transformed_REDIMAGE_RIC, 1) 
+REDIMAGERIC = REAL_PART(fft(transformed_REDIMAGE_RIC, 1)) 
 im = IMAGE(REDIMAGERIC)
 
 SAVE, FILENAME = PATH_TO_SAVE_RIC+'data_interpolated.sav', im1CropPAN, UVIMAGERIC, BLUIMAGERIC, GREENIMAGERIC, REDIMAGERIC
