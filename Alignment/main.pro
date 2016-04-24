@@ -11,7 +11,7 @@ Rangey = 5  ;range Coloumn of search alignment
 ; per verificare il corretto funzionamento dell'algoritmo modificare i seguenti parametri, 
 ; vanno a selezionare uno shift in modo da simulare lo sfasamento
 debug_shift_y  = 1 ;in colonne
-debug_shift_x = 1  ;in righe
+debug_shift_x = 2  ;in righe
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 imgPan_cut = im1CropPAN[Start+debug_shift_y:Finish+debug_shift_y,Start+debug_shift_x:Finish+debug_shift_x] ;cut ImagePan
 Q_indexs = dblarr(Rangey*2+1,Rangex*2+1) ;colonne, righe
@@ -33,7 +33,7 @@ i = (index-j)/(Rangey*2+1)   ; index = i*n°Colonne + j
 print, Q_indexs(j,i)
 
 ;Calcolo Errore
-print, 'Errore: NColonna:   ',j-Rangey
+print, 'Errore: NColonna:   ',j-Rangey ;in perfetto allineamento il massimo si trova in 5,3
 print, 'Errore: NRiga:      ',i-Rangex
 
 ;;;;;;;;;;;;;; immagine fusa;;;;
