@@ -1,26 +1,44 @@
 @paths.pro
 RESTORE, PATH_TO_LOAD_RIC
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Start=50 ;cordinate to start to CUT x,y (MUST: Start-Rangex>0)
+Finish=500; cordinate to finish to CUT x,y
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;Q2N Universal Image Quality Index;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Rangex=3  ;rang Rows of search alignment ;must be dispar
+Rangey=5 ;range Coloumn of search alignment
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+center=[Rangey,Rangex]
 
-S=300
-N=500;
 
-SHIFT=0
-img=im1CropPAN[S:N:1,S:N:1]
-img2=REDIMAGERIC[S+SHIFT:N+SHIFT:1,S+SHIFT:N+SHIFT:1]
-;IMAGE(img)
-;IMAGE(img2)
-x=img
-y=img2 ;con img1 si ottiene 0.9999 che è il massimo valore
-;;;;;;;Q2N;;;;;;;;;;;;;;;
-x_mean=mean(x)
-y_mean=mean(y)
-x_var=variance(x)
-y_var=variance(y)
-xy_cov=mean((x-x_mean)*(y-y_mean)) ;
+;per verificare il corretto funzionamento dell'algoritmo modificare i seguenti parametri, vanno a selezionare uno shift
+;in modo da simulare lo sfasamento
+debug_shift_y=0
+debug_shift_x=0
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+imgPan_cut=im1CropPAN[Start+debug_shift_y:Finish+debug_shift_y,Start+debug_shift_x:Finish+debug_shift_x] ;cut ImagePan
+Q_indexs=dblarr(Rangey*2+1,Rangex*2+1) ;colonne, righe
 
-q=(4*xy_cov*x_mean*y_mean)/((x_var+y_var)*(x_mean^2+y_mean^2)) ;;formula presa dall'articolo
-print, REAL_PART(q)
+for i =-Rangex,Rangex do begin ;i*2+1
+  for j =-Rangey,Rangey do begin
+    imgMS_cut=REDIMAGERIC[Start+j:Finish+j,Start+i:Finish+i] ;cut and shift ImageRED
+    Q_indexs(j+Rangey,i+Rangex)=q2n(imgPan_cut,imgMS_cut)    ;colonne-righe
+endfor
+endfor
+
+;print, Q_indexs
+;Calcolo indici;
+max_Q=max(Q_indexs)
+print,'Quality of image: ',max_Q
+index=where(Q_indexs eq max_Q)
+i=index/(Rangey*2+1)
+j=index-(Rangey*2+1)*i
+;Calcolo Errore
+print, 'Errore: NRiga:',i-Rangex, 'NColonna:',j-Rangey
+
+
+;;;;;;;;;;;;;; immagine fusa;;;;
+out[*,*,0]=imgRed;
+out[*,*,1]=imgGreen;
+out[*,*,2]=imgPan;
+;image(out)
+end
