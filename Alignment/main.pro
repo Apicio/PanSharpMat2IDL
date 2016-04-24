@@ -11,8 +11,8 @@ N=500;
 SHIFT=0
 img=im1CropPAN[S:N:1,S:N:1]
 img2=REDIMAGERIC[S+SHIFT:N+SHIFT:1,S+SHIFT:N+SHIFT:1]
-;IMAGE(img)
-;IMAGE(img2)
+im = IMAGE(img)
+im = IMAGE(img2)
 x=img
 y=img2 ;con img1 si ottiene 0.9999 che è il massimo valore
 ;;;;;;;Q2N;;;;;;;;;;;;;;;
@@ -24,3 +24,5 @@ xy_cov=mean((x-x_mean)*(y-y_mean)) ;
 
 q=(4*xy_cov*x_mean*y_mean)/((x_var+y_var)*(x_mean^2+y_mean^2)) ;;formula presa dall'articolo
 print, REAL_PART(q)
+
+end
