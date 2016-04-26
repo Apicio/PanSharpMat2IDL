@@ -8,6 +8,6 @@ function q2n, x, y
    y_var=variance(y)
    xy_cov=mean((x-x_mean)*(y-y_mean)) ;
 
-  q=(4*xy_cov*x_mean*y_mean)/((x_var+y_var)*(x_mean^2+y_mean^2)) ;;formula presa dall'articolo
-  return, REAL_PART(q)
+  q=(4*abs(xy_cov)*abs(x_mean)*abs(y_mean))/((x_var+y_var)*(abs(x_mean)^2+abs(y_mean)^2)) ;;formula presa dall'articolo
+  return, q
 end
