@@ -25,8 +25,8 @@ for j=1,L DO BEGIN
      UVIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) = UVIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) + IM2CROPMS1P(j-1,i-1)*hsq;
   endfor
 endfor
-UVIMAGE = UVIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
-im = IMAGE(UVIMAGE)
+UVIMAGERIC = UVIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
+im = IMAGE(UVIMAGERIC)
 
 ;BLUIMAGE = IM3CROPMS1 
 BLUIMAGE = intarr((L-1)*N+Lh+1,(L-1)*N+Lh+1)
@@ -35,8 +35,8 @@ for j=1,L DO BEGIN
     BLUIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) = BLUIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) + IM3CROPMS1(j-1,i-1)*hsq;
   endfor
 endfor
-BLUIMAGE = BLUIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
-im = IMAGE(BLUIMAGE)
+BLUIMAGERIC = BLUIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
+im = IMAGE(BLUIMAGERIC)
 
 ;GREENIMAGE = IM4CROPMS2
 GREENIMAGE = intarr((L-1)*N+Lh+1,(L-1)*N+Lh+1)
@@ -45,8 +45,8 @@ for j=1,L DO BEGIN
     GREENIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) = GREENIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) + IM4CROPMS2(j-1,i-1)*hsq;
   endfor
 endfor
-GREENIMAGE = GREENIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
-im = IMAGE(GREENIMAGE)
+GREENIMAGERIC = GREENIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
+im = IMAGE(GREENIMAGERIC)
 
 ;REDIMAGE = IM5CROPMS3
 REDIMAGE = intarr((L-1)*N+Lh+1,(L-1)*N+Lh+1)
@@ -55,7 +55,9 @@ for j=1,L DO BEGIN
     REDIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) = REDIMAGE((j-1)*N+1:(j-1)*N+Lh , (i-1)*N+1:(i-1)*N+Lh) + IM5CROPMS3(j-1,i-1)*hsq;
   endfor
 endfor
-REDIMAGE = REDIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
-im = IMAGE(REDIMAGE)
+REDIMAGERIC = REDIMAGE(tcrp:N*L-1-tcrp,tcrp:N*L-1-tcrp)
+im = IMAGE(REDIMAGERIC)
+
+SAVE, FILENAME = PATH_TO_SAVE_RIC+'data_interpolated_time.sav', im1CropPAN, UVIMAGERIC, BLUIMAGERIC, GREENIMAGERIC, REDIMAGERIC
 
 end
