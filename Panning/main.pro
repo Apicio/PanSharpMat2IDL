@@ -39,15 +39,19 @@ PANIMAGERIC = REAL_PART(fft(TRASFORMED_PANIMAGE_RIC, 1)) ; anti trasformata
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Histogram Matching ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-M1_HIST =  histogram(MS(*,*,0))
-M2_HIST =  histogram(MS(*,*,1))
-M3_HIST =  histogram(MS(*,*,2))
-M4_HIST =  histogram(MS(*,*,3))
+M1_HIST =  histogram(MS(*,*,0), NBINS=256)
+M2_HIST =  histogram(MS(*,*,1), NBINS=256)
+M3_HIST =  histogram(MS(*,*,2), NBINS=256)
+M4_HIST =  histogram(MS(*,*,3), NBINS=256)
 
-PANIMAGERIC_B1_H = histomatch(PANIMAGERIC, M1_HIST)
-PANIMAGERIC_B2_H = histomatch(PANIMAGERIC, M2_HIST)
-PANIMAGERIC_B3_H = histomatch(PANIMAGERIC, M3_HIST)
-PANIMAGERIC_B4_H = histomatch(PANIMAGERIC, M4_HIST)
+;PANIMAGERIC_B1_H = histomatch(PANIMAGERIC, M1_HIST)
+;PANIMAGERIC_B2_H = histomatch(PANIMAGERIC, M2_HIST)
+;PANIMAGERIC_B3_H = histomatch(PANIMAGERIC, M3_HIST)
+;PANIMAGERIC_B4_H = histomatch(PANIMAGERIC, M4_HIST)
+PANIMAGERIC_B1_H = PANIMAGERIC
+PANIMAGERIC_B2_H = PANIMAGERIC
+PANIMAGERIC_B3_H = PANIMAGERIC
+PANIMAGERIC_B4_H = PANIMAGERIC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Compute Gains Gk ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -95,7 +99,7 @@ FUSED_MS(*, *,1) = GAIN_PAN_B2 + MS(*,*,1)
 FUSED_MS(*, *,2) = GAIN_PAN_B3 + MS(*,*,2)
 FUSED_MS(*, *,3) = GAIN_PAN_B4 + MS(*,*,3)
 
-RGB_Image = FUSED_MS[*,*,0:2]
-;Visualizzo l'immagine RGB finale
-im = image(RGB_Image)
+im = image(FUSED_MS[*,*,0:2])
+im = image(IM1CROPPAN)
+im = image(MS[*,*,0:2])
 end
