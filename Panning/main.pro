@@ -4,13 +4,27 @@ N = 3
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;       MTF      ;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-MTF_PANIMAGE = IM1CROPPAN
+;;
+;function MTF_Filt, toFilt, N, scale
+;toFilt -> Immagine da filtrare
+;N      -> Dimensione del filtro
+;scale  -> Fattore di scala (3 nel caso EO-1)
+
+sizes = SIZE(IM1CROPPAN) ;[N_DIM,DIM1,DIM2,DIM3,..,N_ELEM]
+MTF_PANIMAGE = INTARR(sizes(1),sizes(2))
+MTF_Nyq = 0.15;; DA CAMBIARE, PRESO DA SENSORE QB
+fcut = 1/N;
+NFILTER=N*10+1
+sigma = SQRT( ((N*(fcut/2))^2) / (-2*alog(MTF_Nyq)) )
+filter = GAUSSIAN_FUNCTION(sigma, WIDTH = NFILTER)
+filter = CONVOL(filter/max(filter),hanning(N))
+MTF_PANIMAGE = CONVOL(FLOAT(IM1CROPPAN),filter,/EDGE_TRUNCATE)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Blurring PAN Image ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DIM = size(MTF_PANIMAGE, /DIMENSIONS)
 UPSAMPLED_PANIMAGE = intarr(DIM(0),DIM(1))
-DOWNSAMPLED_PANIMAGE = MTF_IMAGE[0:*:N,0:*:N]
+DOWNSAMPLED_PANIMAGE = MTF_PANIMAGE[0:*:N,0:*:N]
 UPSAMPLED_PANIMAGE[0:*:N,0:*:N] = DOWNSAMPLED_PANIMAGE
 TRASFORMED_PANIMAGE = fft(UPSAMPLED_PANIMAGE, -1)
 dim1 = 128
