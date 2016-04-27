@@ -36,7 +36,7 @@ mz2=norm(x_mean);
 e1=x_ref-(indgen(1,(Finish-Start+1)^2)*0+1)##x_mean
 e2=y_ref-(indgen(1,(Finish-Start+1)^2)*0+1)##y_mean
 
-sz1=mean(hyp4_scalar(e1)) ;scalare=media di un vettore
+sz1=mean(hyp4_scalar(e1)) ;varianzaX=media del vettore[(x- Mu)*(x-Mu)]
 sz2=mean(hyp4_scalar(e2));
 sz1z2=norm(mean(hyp4_scalar(e1,e2),DIMENSION=2));
 
