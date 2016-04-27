@@ -13,10 +13,10 @@ N = 3
 sizes = SIZE(IM1CROPPAN) ;[N_DIM,DIM1,DIM2,DIM3,..,N_ELEM]
 MTF_PANIMAGE = INTARR(sizes(1),sizes(2))
 MTF_Nyq = 0.15;; DA CAMBIARE, PRESO DA SENSORE QB
-fcut = 1/N;
-NFILTER=N*10+1
-sigma = SQRT( ((N*(fcut/2))^2) / (-2*alog(MTF_Nyq)) )
-filter = GAUSSIAN_FUNCTION(sigma, WIDTH = NFILTER)
+fcut = 1./N;
+NFILTER=N*12+1
+sigma = SQRT( ((N*(fcut/2))^2) / (-2.*alog(MTF_Nyq)) ) 
+filter = GAUSSIAN_FUNCTION([sigma,sigma], WIDTH = NFILTER)
 filter = CONVOL(filter/max(filter),hanning(N))
 MTF_PANIMAGE = CONVOL(FLOAT(IM1CROPPAN),filter,/EDGE_TRUNCATE)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
