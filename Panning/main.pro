@@ -29,30 +29,25 @@ UPSAMPLED_PANIMAGE[0:*:N,0:*:N] = DOWNSAMPLED_PANIMAGE
 TRASFORMED_PANIMAGE = fft(UPSAMPLED_PANIMAGE, -1)
 dim1 = 128
 dim2 = 512
-H1 = (intarr(dim1,dim1)+1)*N;
+H1 = (intarr(dim1,dim1)+1)*N 
 H0_1 = intarr(dim2,dim1)
 H0_2 = intarr(dim1,dim2)
 H0_3 = intarr(dim2,dim2)
 H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
 TRASFORMED_PANIMAGE_RIC = TRASFORMED_PANIMAGE*H
 PANIMAGERIC = REAL_PART(fft(TRASFORMED_PANIMAGE_RIC, 1)) ; anti trasformata
-
-PANIMAGERIC_B1 = intarr(DIM(0),DIM(1))
-PANIMAGERIC_B2 = intarr(DIM(0),DIM(1))
-PANIMAGERIC_B3 = intarr(DIM(0),DIM(1))
-PANIMAGERIC_B4 = intarr(DIM(0),DIM(1))
-
-PANIMAGERIC_B1 = PANIMAGERIC 
-PANIMAGERIC_B2 = PANIMAGERIC 
-PANIMAGERIC_B3 = PANIMAGERIC 
-PANIMAGERIC_B4 = PANIMAGERIC 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Histogram Matching ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-PANIMAGERIC_B1_H = PANIMAGERIC_B1
-PANIMAGERIC_B2_H = PANIMAGERIC_B2
-PANIMAGERIC_B3_H = PANIMAGERIC_B3
-PANIMAGERIC_B4_H = PANIMAGERIC_B4
+M1_HIST =  histogram(MS(*,*,0))
+M2_HIST =  histogram(MS(*,*,1))
+M3_HIST =  histogram(MS(*,*,2))
+M4_HIST =  histogram(MS(*,*,3))
+
+PANIMAGERIC_B1_H = histomatch(PANIMAGERIC, M1_HIST)
+PANIMAGERIC_B2_H = histomatch(PANIMAGERIC, M2_HIST)
+PANIMAGERIC_B3_H = histomatch(PANIMAGERIC, M3_HIST)
+PANIMAGERIC_B4_H = histomatch(PANIMAGERIC, M4_HIST)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Compute Gains Gk ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
