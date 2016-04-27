@@ -29,7 +29,7 @@ FOR i=0,NBands-1 DO BEGIN
   filter = CONVOL(filter,hanning(NFILTER),  /EDGE_TRUNCATE)
   MTF_PANIMAGE(*,*,i) = CONVOL(FLOAT(PANIMAGE4(*,*,i)),filter, /EDGE_TRUNCATE)
 ENDFOR
-
+MTF_PANIMAGE = PANIMAGE4
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Blurring PAN Image ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,6 +45,7 @@ M1_HIST =  histogram(MS(*,*,0), NBINS=256)
 M2_HIST =  histogram(MS(*,*,1), NBINS=256)
 M3_HIST =  histogram(MS(*,*,2), NBINS=256)
 M4_HIST =  histogram(MS(*,*,3), NBINS=256)
+PANIMAGERIC_H = INTARR(sizes(1),sizes(2), sizes(3))
 
 PANIMAGERIC_H(*,*,0) = histomatch(PANIMAGERIC(*,*,0), M1_HIST)
 PANIMAGERIC_H(*,*,1) = histomatch(PANIMAGERIC(*,*,1), M2_HIST)
