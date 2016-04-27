@@ -1,11 +1,11 @@
 clc; clear all; close all;
 import matlab.io.hdf4.*
-% paths %% File da creare con i percorsi al dataset
-path1 = '../../Dataset/EO1A1750842002090110PY_B01_L1T.TIF';
-path2 = '../../Dataset/EO1A1750842002090110PY_B02_L1T.TIF'; 
-path3 = '../../Dataset/EO1A1750842002090110PY_B03_L1T.TIF'; 
-path4 = '../../Dataset/EO1A1750842002090110PY_B04_L1T.TIF'; 
-path5 = '../../Dataset/EO1A1750842002090110PY_B05_L1T.TIF'; 
+paths %% File da creare con i percorsi al dataset
+% path1 = '../../Dataset/EO1A1750842002090110PY_B01_L1T.TIF';
+% path2 = '../../Dataset/EO1A1750842002090110PY_B02_L1T.TIF'; 
+% path3 = '../../Dataset/EO1A1750842002090110PY_B03_L1T.TIF'; 
+% path4 = '../../Dataset/EO1A1750842002090110PY_B04_L1T.TIF'; 
+% path5 = '../../Dataset/EO1A1750842002090110PY_B05_L1T.TIF'; 
 pan = GEOTIFF_READ(path1); % PAN
 ms1p = GEOTIFF_READ(path2); % UV
 ms1 = GEOTIFF_READ(path3); % BLU
