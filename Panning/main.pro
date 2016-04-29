@@ -29,7 +29,7 @@ FOR i=0,NBands-1 DO BEGIN
   filter = GAUSSIAN_FUNCTION([sigma,sigma], WIDTH = NFILTER)
   filter = filter/total(filter)
   filter = filter/max(filter)
-  filter = CONVOL(filter,kaiser##kaiser, /EDGE_MIRROR)
+  filter = CONVOL(filter,kaiser##kaiser, /EDGE_MIRROR, /normalize)
   MTF_PANIMAGE(*,*,i) = CONVOL(FLOAT(PANIMAGE4(*,*,i)),filter,/EDGE_MIRROR,/normalize)
 ENDFOR
 ;MTF_PANIMAGE = PANIMAGE4
