@@ -12,13 +12,17 @@ ms1 = GEOTIFF_READ(path3); % BLU
 ms2 = GEOTIFF_READ(path4); % VERDE
 ms3 = GEOTIFF_READ(path5); % ROSSO
 %% Creazione HDF4 - Usa SD API. 
-% Struttura:
-%        _________________________________________________________
-%       |                        HDF4                             | ---[Global Attr (mancano)]
-%       |_________________________________________________________|
-%       /          |              |          ...       |      ...  \
-%    SDS_PAN    SDS_PAN_RAW    SDS_PAN_INFO          SDS_UV      SDS_N
-%    
+% Proposed Structure:
+%        _____________________________________________________________________
+%       |                                 HDF4                                | 
+%       |_____________________________________________________________________|
+%       /                  |                    |                |     ...     \
+%    SDS_PAN           SDS_PAN_RAW         SDS_PAN_INFO        SDS_UV          SDS_N
+%       |                   |                   |                 |              |    
+% Geogaphic Coords       Raw Data          Num Samples           ...            ...    
+%                                          Num Lines 
+%                                          Num Bands
+%                                          Spatial Res.
 %
 sdID = sd.start('dataset.hdf','create');
 
