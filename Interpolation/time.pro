@@ -1,7 +1,7 @@
 @paths.pro
 RESTORE, PATH_TO_FILE
 L = 256
-N = 3.
+N = 3
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Cubic Filter ;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
