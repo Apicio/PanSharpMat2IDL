@@ -3,14 +3,14 @@ HDFID = hdf_sd_start(PATH_TO_DB)
 hdf_sd_fileinfo, HDFID, nvars, ngatts
 varnames=NomiVariabiliHDF(hdfid)
 cutDim = [256*3, 256*3]
-startCoords = [1701,5502]
+startCoords = [1401,5202]
 
 ;;;;;;;;; PAN ;;;;;;;;;;;;
 index=hdf_sd_nametoindex(hdfid,'PAN_raw_data')
 varid = hdf_sd_select(hdfid,index)
 hdf_sd_getdata, varid, dati
 im1 = IMAGE(dati)
-CroppedIm1 = dati(1701:1701+cutDim[0]-1, 5502-cutDim[1]:5502-1 )
+CroppedIm1 = dati(startCoords[0]:startCoords[0]+cutDim[0]-1, startCoords[1]-cutDim[1]:startCoords[1]-1 )
 im1Crop = IMAGE(CroppedIm1)
 hdf_sd_endaccess, varid
 
@@ -54,10 +54,10 @@ hdf_sd_endaccess, varid
 hdf_sd_end, hdfid
 
 im1Crop.GetData,im1CropPAN
-im2Crop.GetData,im2CropMS1p
-im3Crop.GetData,im3CropMS1
-im4Crop.GetData,im4CropMS2
-im5Crop.GetData,im5CropMS3
+im2Crop.GetData,im2CropMS1p ;UV
+im3Crop.GetData,im3CropMS1 ;B
+im4Crop.GetData,im4CropMS2 ;G
+im5Crop.GetData,im5CropMS3 ;R
 
 SAVE, FILENAME = PATH_TO_SAVE+'data.sav', im1CropPAN, im2CropMS1p, im3CropMS1, im4CropMS2,im5CropMS3
 end

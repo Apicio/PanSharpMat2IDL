@@ -6,9 +6,6 @@ function sresize, image_in, N
   UPSAMPLED_IMAGE[start:*:N,start:*:N] = DOWNSAMPLED_IMAGE
   Nterms = 22
   Coeff = DIGITAL_FILTER(0, 1./N, 50, Nterms)
-  ;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;;; Cubic Filter ;;;;;;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;
   h = Coeff/max(Coeff)
   hsq = h#TRANSPOSE(h)
   IMAGERIC = CONVOL_FFT(UPSAMPLED_IMAGE, hsq, /CORRELATE)
