@@ -64,6 +64,7 @@ function q4n_extend, x, y, block=block
       sz1=mean(hyp4_scalar(e1)) ;varianzaX=media del vettore[(x- Mu)*(x-Mu)]
       sz2=mean(hyp4_scalar(e2));
       sz1z2=norm(mean(hyp4_scalar(e1,e2),DIMENSION=2));
+     
 
       q(j,i)=4*sz1z2/(sz1+sz2)*mz1*mz2/(mz1^2+mz2^2) ;formula q4n
     endfor
