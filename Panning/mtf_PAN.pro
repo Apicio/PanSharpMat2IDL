@@ -1,4 +1,4 @@
-function MTF, PAN,ratio,NBands
+function MTF_PAN, PAN,ratio,NBands
   N = ratio
   sizes = SIZE(PAN)
   toReturn = DBLARR(sizes(1),sizes(2),NBands)

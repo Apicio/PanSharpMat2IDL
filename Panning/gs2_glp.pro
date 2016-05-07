@@ -7,7 +7,7 @@ function GS2_GLP,PAN,MS,ratio
   PANIMAGE4(*,*,2) = PAN
   PANIMAGE4(*,*,3) = PAN
   
-  MTF_PANIMAGE = mtf(PAN,ratio,Nbands)
+  MTF_PANIMAGE = mtf_pan(PAN,ratio,Nbands)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;; Blurring PAN Image ;;;;
