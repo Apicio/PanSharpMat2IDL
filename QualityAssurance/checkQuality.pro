@@ -44,7 +44,7 @@ PAN = IM1CROPPAN
 ;       Confronto fra immagine pansharp degradata ed MS ORIGINALE
 ; 
 ; DEGRADAZIONE IMMAGINI
-Degrad_PAN = mtf(PAN,3,4);
+Degrad_PAN = mtf_pan(PAN,3,4);
 Degrad_MS = mtf_ms(MS,3,4);
 
 Degrad_PAN = Degrad_PAN(0:*:3,0:*:3,*)
@@ -54,9 +54,12 @@ Degrad_MS = Degrad_MS(0:*:3,0:*:3,*)
 Fused_Image = gs2_glp(Degrad_PAN[*,*,0],Degrad_MS,3)
 
 ; Verifico Qualità
+ok = q4n_extend(Fused_image,ms_orig)
 ok = scc_index(ms_orig,Fused_image)
+ok = sam(ms_orig,Fused_image)
 
-
-
+; q4n exnd: 0.128656343
+; Scc: 0.82550938226554482
+; sam: Program caused arithmetic error: Floating illegal operand
 
 end
