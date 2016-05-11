@@ -1,6 +1,6 @@
 @paths.pro
 RESTORE, PATH_TO_FILE
-L = 256
+L = 256 
 N = 3
 ; magnifiedIm = CONGRID(IM2CROPMS1P, 768, 768, /INTERP)
 ; im2 = IMAGE(magnifiedIm)
@@ -30,10 +30,10 @@ transformed_REDIMAGE = fft(REDIMAGE, -1)
 ;;;;;;;;;;;;;;;;;;; ;xRic = ifft(XRIC);
 dim1 = 128
 dim2 = 512
-H1 = (intarr(dim1,dim1)+1)*N;
-H0_1 = intarr(dim2,dim1)
-H0_2 = intarr(dim1,dim2)
-H0_3 = intarr(dim2,dim2)
+H1 = (dblarr(dim1,dim1)+1)*N;
+H0_1 = dblarr(dim2,dim1)
+H0_2 = dblarr(dim1,dim2)
+H0_3 = dblarr(dim2,dim2)
 H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
  
 transformed_UVIMAGE_RIC = transformed_UVIMAGE*H ;prodotto elemento per elemento
