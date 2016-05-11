@@ -1,6 +1,8 @@
 @paths.pro
 HDFID = hdf_sd_start(PATH_TO_DB)
 hdf_sd_fileinfo, HDFID, nvars, ngatts
+result = HDF_SD_ATTLIST( HDFID, nvars,  /global)
+hdf_sd_getdata, varid, dati
 varnames=NomiVariabiliHDF(hdfid)
 cutDim = [256*3, 256*3]
 startCoords = [1401,5202]

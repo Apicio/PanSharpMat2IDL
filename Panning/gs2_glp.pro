@@ -60,11 +60,11 @@ function GS2_GLP,PAN,MS,ratio
     ENDFOR
   ENDFOR
 
-  im = image(PAN)
-  im = image(MS[*,*,0:2])
-  im = image(FUSED_MS[*,*,0:2])
+;  im = image(PAN)
+;  im = image(MS[*,*,0:2])
+;  im = image(FUSED_MS[*,*,0:2])
 
-  SAVE, FILENAME = PATH_TO_PANNED, FUSED_MS
+ ; SAVE, FILENAME = PATH_TO_PANNED, FUSED_MS
   
   return, FUSED_MS
 end

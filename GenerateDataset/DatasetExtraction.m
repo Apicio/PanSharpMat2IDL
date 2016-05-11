@@ -9,7 +9,7 @@ ms3 = GEOTIFF_READ(path5); % ROSSO
 %% Creazione HDF4 - Usa SD API. 
 % Proposed Structure:
 %        _____________________________________________________________________
-%       |                                 HDF4                                | 
+%       |                                 HDF4                                |-> Global Attributes 
 %       |_____________________________________________________________________|
 %       /                  |                    |                |     ...     \
 %    SDS_PAN           SDS_PAN_RAW         SDS_PAN_INFO        SDS_UV          SDS_N
@@ -20,6 +20,9 @@ ms3 = GEOTIFF_READ(path5); % ROSSO
 %                                          Spatial Res.
 %
 sdID = sd.start('dataset.hdf','create');
+sd.setAttr(sdID,'ratio',3);
+sd.setAttr(sdID,'MTF_Nyq',[0.28,0.29, 0.29, 0.30]);
+
 
 %PAN_SDS1
 ds_name = 'PAN_spatial_coords'; ds_type = 'double'; toWrite = [pan.x,pan.y]; ds_dims = size(toWrite);
