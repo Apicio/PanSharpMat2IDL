@@ -12,7 +12,7 @@ function q4n_extend, x, y, block=block
   ;    y       Rappresenta la seconda immagine
   ;
   ; OPTIONAL INPUTS:
-  ;    block   Parametro opzionale che rappresenta il blocco su cui verrà applicato il Q4N
+  ;    block   Parametro opzionale che rappresenta il blocco su cui verrà applicato localmente il Q4N
   ;
   ; OUTPUTS:
   ;    Il valore di ritorno è l'indice di qualità Q4N associato alle due immagini x e y
@@ -35,6 +35,8 @@ function q4n_extend, x, y, block=block
   old_percentuale=0; Percentuale di completamento
 
   ;viene estesa l'immagine aggiungendo allaragandola di block/2 a destra a sinistra in alto e in basso
+  ;Extend ci serve per poter mediare la finestra di blocco, in modo da pesare i campioni adiacenti a (0,0), 
+  ;dal momento che la finestra la possiamo vedre come una sorta di convoluzione e quindi che si sposta nello spazio
   x=extend(x,floor(block/2),ceil(block)/2); //floor arrotonda per difetto; ceil per eccesso
   y=extend(y,floor(block/2),ceil(block)/2);
   s=size(x) ;sarà di dimensione +block per riga e colonne
@@ -46,20 +48,20 @@ function q4n_extend, x, y, block=block
   for i = 0,L2f-1 do begin
     for j = 0,L1f-1 do begin
 
-      x_ref=transpose(reform(x[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ; x_ref sarà una matrice bidimensionale N x N.bande
+      x_ref=transpose(reform(x[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ; x_ref sarà una matrice bidimensionale N(=block*block) x N.bande
       y_ref=transpose(reform(y[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ;
-
+      x_ref_size=size(x_ref)
       x_mean=mean(x_ref,DIMENSION=2) ;equivale a x_mean=[mean(x[*,*,0]),mean(x[*,*,1]),mean(x[*,*,2])] ;vettore 1x N.bande
       y_mean=mean(y_ref,DIMENSION=2)
-
+      
       mz1=norm(x_mean); ;scalare
       mz2=norm(x_mean);
 
       ;(indgen(1,(Finish-Start+1)^2)*0+1)=vettore di tutti 1; vettore N*1, a cui viene fatto un prodotto matriciale con la media di x(vettore 1*nBande)
       ;la seconda istruzione crea una matrice N*nBande in cui c'è la media(iesima) per ogni colonna;
       ;al fine poter sottrarre alla matrice originale la media per ogni banda
-      e1=x_ref-(indgen(1,s(1)*s(2))*0+1)##x_mean
-      e2=y_ref-(indgen(1,s(1)*s(2))*0+1)##y_mean
+      e1=x_ref-(indgen(1,x_ref_size(2))*0+1)##x_mean ;;fixed
+      e2=y_ref-(indgen(1,x_ref_size(2))*0+1)##y_mean
 
       sz1=mean(hyp4_scalar(e1)) ;varianzaX=media del vettore[(x- Mu)*(x-Mu)]
       sz2=mean(hyp4_scalar(e2));
