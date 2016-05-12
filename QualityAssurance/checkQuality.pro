@@ -33,7 +33,7 @@ PAN = IM1CROPPAN
 Degrad_PAN = mtf_pan(PAN,ratio,NBands);
 Degrad_MS = mtf_ms(MS,ratio,NBands);
 
-; Aumento le proporzioni dell'immagine MS degradata di un fattore pari al ratio
+; Interpolazione MS degradata di un fattore pari al ratio
 ; per poter applicare poi la fusione (in questo modo effetto il vero e proprio blurring)
 Degrad_MS(*,*,0) = sresize(Degrad_MS(*,*,0),ratio)
 Degrad_MS(*,*,1) = sresize(Degrad_MS(*,*,1),ratio)
@@ -48,12 +48,12 @@ Degrad_PAN = Degrad_PAN(0:*:ratio,0:*:ratio,*)
 Fused_Image = gs2_glp(Degrad_PAN(*,*,0),Degrad_MS,ratio)
 
 ; Verifico Qualità
-;ok = q4n_extend(Fused_image,ms_orig)
-ok = scc_index(ms_orig,Fused_image)
-ok = sam(ms_orig,Fused_image)
+ok = q4n_extend(Fused_image,MS)
+ok = scc_index(MS,Fused_image)
+;ok = sam(ms_orig,Fused_image)
 
-; q4n exnd: 0.128656343
-; Scc: 0.82550938226554482
+; q4n exnd: 0.81 / 0.88 (con ENVI)
+; Scc: 0.681  / 0.76 (Con ENVI)
 ; sam: Program caused arithmetic error: Floating illegal operand
 
 end
