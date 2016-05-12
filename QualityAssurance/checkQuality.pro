@@ -33,17 +33,23 @@ PAN = IM1CROPPAN
 Degrad_PAN = mtf_pan(PAN,ratio,NBands);
 Degrad_MS = mtf_ms(MS,ratio,NBands);
 
+; Aumento le proporzioni dell'immagine MS degradata di un fattore pari al ratio
+; per poter applicare poi la fusione (in questo modo effetto il vero e proprio blurring)
+Degrad_MS(*,*,0) = sresize(Degrad_MS(*,*,0),ratio)
+Degrad_MS(*,*,1) = sresize(Degrad_MS(*,*,1),ratio)
+Degrad_MS(*,*,2) = sresize(Degrad_MS(*,*,2),ratio)
+Degrad_MS(*,*,3) = sresize(Degrad_MS(*,*,3),ratio)
+
+; Blurring dell'immagine PAN (che non ha bisogno di un resize)
 Degrad_PAN = Degrad_PAN(0:*:ratio,0:*:ratio,*)
-;Degrad_MS = Degrad_MS(0:*:3,0:*:3,*) ;
-;
-;
+
 ; Applicazione pansharpening GS2_GLP a PAN ed MS degradate
 
-Fused_Image = gs2_glp(Degrad_PAN[*,*,0],Degrad_MS,ratio)
+Fused_Image = gs2_glp(Degrad_PAN(*,*,0),Degrad_MS,ratio)
 
 ; Verifico Qualità
 ;ok = q4n_extend(Fused_image,ms_orig)
-;ok = scc_index(ms_orig,Fused_image)
+ok = scc_index(ms_orig,Fused_image)
 ok = sam(ms_orig,Fused_image)
 
 ; q4n exnd: 0.128656343
