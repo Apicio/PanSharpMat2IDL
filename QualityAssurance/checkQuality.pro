@@ -48,9 +48,9 @@ Degrad_PAN = Degrad_PAN(0:*:ratio,0:*:ratio,*)
 Fused_Image = gs2_glp(Degrad_PAN(*,*,0),Degrad_MS,ratio)
 
 ; Verifico Qualità
-ok = q4n_extend(Fused_image,MS)
-ok = scc_index(MS,Fused_image)
-;ok = sam(ms_orig,Fused_image)
+q4 = q4n_extend(Fused_image,MS)
+scc = scc_index(MS,Fused_image)
+sam = sam(ms,Fused_image)
 
 ; q4n exnd: 0.81 / 0.88 (con ENVI)
 ; Scc: 0.681  / 0.76 (Con ENVI)

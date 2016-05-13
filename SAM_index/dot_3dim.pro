@@ -13,7 +13,9 @@ c2=DBLARR(sizes(3))
 for i = 0,sizes(1)-1,1 do begin
   for j = 0,sizes(2)-1,1 do begin
    c1 = I1(i,j,*)
+   c1 = reform(c1,sizes(3))
    c2 = I2(i,j,*)
+   c2 = reform(c2,sizes(3))
    res(i,j) = total(transpose(c1)#c2)
   endfor
 endfor
