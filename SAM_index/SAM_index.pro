@@ -25,7 +25,7 @@ SAM_map = acos(prod_scal/prod_norm)
 v1_scal =prod_scal(*)
 v2_norm =prod_norm(*)
 
-
+;Si controlla se ci sono elementi pari a 0 e li si rimuove, probabilmente perché non hanno peso nel calcolo dell'indice
 z = where(v2_norm eq 0)
 if z NE -1 then begin
   dimz = size(z,/dimension)
@@ -46,7 +46,8 @@ size_v2_norm = S[1] ; la dimensione corrisponde all'elemento di indice 2 nel vet
 
 ; calcolo l'angolo
 angle = TOTAL(TOTAL(acos(v1_scal/v2_norm)))/size_v2_norm
-; calcolo l'indice SAM
+; calcolo l'indice SAM in gradi
+;0 è il meglio
 SAM_index = angle*180/3.1416
 
 return, SAM_index
