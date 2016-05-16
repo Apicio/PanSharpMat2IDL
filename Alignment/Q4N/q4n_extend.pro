@@ -1,4 +1,4 @@
-function q4n_extend, x, y, block=block
+function q4n_extend, x_in, y_in, block=block
   ;+
   ; NAME:
   ;    q4n_extend
@@ -37,8 +37,8 @@ function q4n_extend, x, y, block=block
   ;viene estesa l'immagine aggiungendo allaragandola di block/2 a destra a sinistra in alto e in basso
   ;Extend ci serve per poter mediare la finestra di blocco, in modo da pesare i campioni adiacenti a (0,0), 
   ;dal momento che la finestra la possiamo vedre come una sorta di convoluzione e quindi che si sposta nello spazio
-  x=extend(x,floor(block/2),ceil(block)/2); //floor arrotonda per difetto; ceil per eccesso
-  y=extend(y,floor(block/2),ceil(block)/2);
+  x=extend(x_in,floor(block/2),ceil(block)/2); //floor arrotonda per difetto; ceil per eccesso
+  y=extend(y_in,floor(block/2),ceil(block)/2);
   s=size(x) ;sarà di dimensione +block per riga e colonne
   L1f=floor(s(1)-Block); n colonne originali di x
   L2f=floor(s(2)-Block); n righe originali di x

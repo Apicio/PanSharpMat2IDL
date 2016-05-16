@@ -7,10 +7,10 @@ N = 3
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Espansione nel tempo UPSAMPLING ;; ; xEsp = upsample(xT,N);
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ; XESP = fft(xEsp,N*L);
-UVIMAGE = intarr(N*L,N*L)
-BLUIMAGE = intarr(N*L,N*L)
-GREENIMAGE = intarr(N*L,N*L)
-REDIMAGE = intarr(N*L,N*L)
+UVIMAGE = DBLARR(N*L,N*L)
+BLUIMAGE = DBLARR(N*L,N*L)
+GREENIMAGE = DBLARR(N*L,N*L)
+REDIMAGE = DBLARR(N*L,N*L)
 UVIMAGE[0:*:N,0:*:N] = IM2CROPMS1P ; si prendono tutte le righe (risp colonne) da 0 fino alla fine (*) con passo N
                                    ; gli si assegna la matrice originale per l'espazione
 ;im = IMAGE(UVIMAGE)               ; visualizziamo il risultato
@@ -34,7 +34,7 @@ H1 = (dblarr(dim1,dim1)+1)*N;
 H0_1 = dblarr(dim2,dim1)
 H0_2 = dblarr(dim1,dim2)
 H0_3 = dblarr(dim2,dim2)
-H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
+H = N*[[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
  
 transformed_UVIMAGE_RIC = transformed_UVIMAGE*H ;prodotto elemento per elemento
 transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
@@ -49,6 +49,12 @@ GREENIMAGERIC = REAL_PART(fft(transformed_GREENIMAGE_RIC, 1))
 im = IMAGE(GREENIMAGERIC)
 REDIMAGERIC = REAL_PART(fft(transformed_REDIMAGE_RIC, 1)) 
 im = IMAGE(REDIMAGERIC)
+
+print, mean(UVIMAGERIC)
+print, mean(BLUIMAGERIC)
+print, mean(GREENIMAGERIC)
+print, mean(REDIMAGERIC)
+
 
 SAVE, FILENAME = PATH_TO_SAVE_RIC+'data_interpolated_frequency.sav', im1CropPAN, UVIMAGERIC, BLUIMAGERIC, GREENIMAGERIC, REDIMAGERIC
 end

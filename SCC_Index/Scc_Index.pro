@@ -1,4 +1,4 @@
-function Scc_Index, Mi, M
+function Scc_Index, GroundTruth, Fused
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  SCC Spatial Cross-Correlation  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,20 +6,22 @@ function Scc_Index, Mi, M
 ;; Mi = Ground Truth
 ;; M =  Immagine Fusa
 ;Prendo il numero di bande delle immagini
-s = size(M)
-Nb = s(3)
+s = size(Fused,/dimension)
+M = DBLARR(s(0),s(1),s(2))
+Mi = DBLARR(s(0),s(1),s(2))
+Nb = s(2)
 
-; Prima di procedere al calcolo dell'indice, effettuo il filtraggio con Sobel di entrmbe le immagini
+; Prima di procedere al calcolo dell'indice, effettuo il filtraggio con Sobel di entrambe le immagini
 
-M(*,*,0) = sobel(M(*,*,0))
-M(*,*,1) = sobel(M(*,*,1))
-M(*,*,2) = sobel(M(*,*,2))
-M(*,*,3) = sobel(M(*,*,3))
+M(*,*,0) = sobel(Fused(*,*,0))
+M(*,*,1) = sobel(Fused(*,*,1))
+M(*,*,2) = sobel(Fused(*,*,2))
+M(*,*,3) = sobel(Fused(*,*,3))
 
-Mi(*,*,0) = sobel(Mi(*,*,0))
-Mi(*,*,1) = sobel(Mi(*,*,1))
-Mi(*,*,2) = sobel(Mi(*,*,2))
-Mi(*,*,3) = sobel(Mi(*,*,3))
+Mi(*,*,0) = sobel(GroundTruth(*,*,0))
+Mi(*,*,1) = sobel(GroundTruth(*,*,1))
+Mi(*,*,2) = sobel(GroundTruth(*,*,2))
+Mi(*,*,3) = sobel(GroundTruth(*,*,3))
 
 ; Calcolo prima la sommatoria che va da 1 al numero di bande 
 sommatoria = 0

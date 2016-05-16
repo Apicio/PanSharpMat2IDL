@@ -4,8 +4,8 @@ restore, PATH_TO_LOAD_RIC
 ;Acquisisco la dimensione di una delle immagini (matrici) per settare la struttura utile alla fusione delle immagini
 s = size(redimageric)
 ;Definisco un array di matrici che conterrà tutti e 4 i canali
-MS = indgen(s(1), s(2),4) ;The INDGEN function returns an array with the specified dimensions. 
-                                    ;Each element of the array is set to the value of its one-dimensional subscript. 
+MS = DBLARR(s(1), s(2),4) 
+
 MS(*, *,0) = redimageric
 MS(*, *,1) = greenimageric
 MS(*, *,2) = bluimageric
