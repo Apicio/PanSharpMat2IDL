@@ -30,11 +30,19 @@ transformed_REDIMAGE = fft(REDIMAGE, -1)
 ;;;;;;;;;;;;;;;;;;; ;xRic = ifft(XRIC);
 dim1 = 128
 dim2 = 512
-H1 = (dblarr(dim1,dim1)+1)*N;
+H1 = (dblarr(dim1,dim1)+1)*0;
+; filtro isotropico
+for i=0,dim1-1 do begin
+  for j = 0, dim1-1 do begin
+    if (i^2+j^2) LT dim1^2-1  then begin
+      H1(j,i) = N
+    endif
+  endfor
+endfor
 H0_1 = dblarr(dim2,dim1)
 H0_2 = dblarr(dim1,dim2)
 H0_3 = dblarr(dim2,dim2)
-H = N*[[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
+H = N*[[H1, H0_1, ROTATE(H1,1)],[H0_2, H0_3, H0_2],[ROTATE(H1,-1), H0_1, ROTATE(H1,2)]] ; Filtro
  
 transformed_UVIMAGE_RIC = transformed_UVIMAGE*H ;prodotto elemento per elemento
 transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
