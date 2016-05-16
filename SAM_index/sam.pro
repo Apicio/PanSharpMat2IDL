@@ -27,10 +27,10 @@ v2_norm =prod_norm(*)
 
 ;Si controlla se ci sono elementi pari a 0 e li si rimuove, probabilmente perché non hanno peso nel calcolo dell'indice
 z = where(v2_norm eq 0)
-if z NE -1 then begin
+if z(0) NE -1 then begin
   dimz = size(z,/dimension)
   dimv = size(v1_scal,/dimension)
-  for i=dimz(1),0,-1  do begin
+  for i=dimz(0)-1,0,-1  do begin
     v2_norm[z(i):*] =v2_norm[z(i)+1:*]
     v1_scal[z(i):*] =v1_scal[z(i)+1:*]
   endfor

@@ -1,13 +1,17 @@
 function GS2_GLP,PAN,MS,ratio
   sizes = SIZE(MS)
   Nbands = sizes(3)
+  MTF_NyqMS =  [0.28,0.29, 0.29, 0.30]
+  MTF_NyqPAN =  0.15
+
+  
   PANIMAGE4 = DBLARR(sizes(1),sizes(2),NBands)
   PANIMAGE4(*,*,0) = PAN
   PANIMAGE4(*,*,1) = PAN
   PANIMAGE4(*,*,2) = PAN
   PANIMAGE4(*,*,3) = PAN
   
-  MTF_PANIMAGE = mtf_pan(PAN,ratio,Nbands)
+  MTF_PANIMAGE = mtf(PANIMAGE4,ratio,Nbands,MTF_NyqMS)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;; Blurring PAN Image ;;;;
@@ -40,7 +44,7 @@ function GS2_GLP,PAN,MS,ratio
   FOR j=0,sizes(1)-1 DO BEGIN
     FOR i=0,sizes(2)-1 DO BEGIN
       FOR b=0,sizes(3)-1 DO BEGIN
-        DELTA_PAN(j,i,b) = PANIMAGE4(j,i,b) - PANIMAGERIC(j,i,0)
+        DELTA_PAN(j,i,b) = PANIMAGE4(j,i,b) - PANIMAGERIC(j,i,b)
       ENDFOR
     ENDFOR
   ENDFOR
@@ -64,7 +68,7 @@ function GS2_GLP,PAN,MS,ratio
 ;  im = image(MS[*,*,0:2])
 ;  im = image(FUSED_MS[*,*,0:2])
 
- ; SAVE, FILENAME = PATH_TO_PANNED, FUSED_MS
+ ;SAVE, FILENAME = PATH_TO_PANNED, FUSED_MS
   
   return, FUSED_MS
 end

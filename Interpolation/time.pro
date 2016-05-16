@@ -12,10 +12,10 @@ hsq = h#TRANSPOSE(h)
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Interpolate  ;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-UVIMAGE = intarr(N*L(0),N*L(1))
-BLUIMAGE = intarr(N*L(0),N*L(1))
-GREENIMAGE = intarr(N*L(0),N*L(1))
-REDIMAGE = intarr(N*L(0),N*L(1))
+UVIMAGE = DBLARR(N*L(0),N*L(1))
+BLUIMAGE = DBLARR(N*L(0),N*L(1))
+GREENIMAGE = DBLARR(N*L(0),N*L(1))
+REDIMAGE = DBLARR(N*L(0),N*L(1))
 
 ; UVIMAGE = IM2CROPMS1P
 UVIMAGE[0:*:N,0:*:N] = IM2CROPMS1P

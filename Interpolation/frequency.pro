@@ -7,10 +7,10 @@ N = 3
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Espansione nel tempo UPSAMPLING ;; ; xEsp = upsample(xT,N);
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ; XESP = fft(xEsp,N*L);
-UVIMAGE = intarr(N*L,N*L)
-BLUIMAGE = intarr(N*L,N*L)
-GREENIMAGE = intarr(N*L,N*L)
-REDIMAGE = intarr(N*L,N*L)
+UVIMAGE = DBLARR(N*L,N*L)
+BLUIMAGE = DBLARR(N*L,N*L)
+GREENIMAGE = DBLARR(N*L,N*L)
+REDIMAGE = DBLARR(N*L,N*L)
 UVIMAGE[0:*:N,0:*:N] = IM2CROPMS1P ; si prendono tutte le righe (risp colonne) da 0 fino alla fine (*) con passo N
                                    ; gli si assegna la matrice originale per l'espazione
 ;im = IMAGE(UVIMAGE)               ; visualizziamo il risultato

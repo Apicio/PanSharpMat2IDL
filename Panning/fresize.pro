@@ -1,6 +1,6 @@
 function fresize, image, N
   DIM = size(image, /DIMENSIONS)
-  UPSAMPLED_IMAGE = intarr(DIM(0),DIM(1))
+  UPSAMPLED_IMAGE = DBLARR(DIM(0),DIM(1))
   DOWNSAMPLED_IMAGE = image[0:*:N,0:*:N]
   UPSAMPLED_IMAGE[0:*:N,0:*:N] = DOWNSAMPLED_IMAGE
   TRASFORMED_IMAGE = fft(UPSAMPLED_IMAGE, -1)
