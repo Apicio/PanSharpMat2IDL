@@ -55,7 +55,7 @@ scc = scc_index(MS,Fused_image)
 samidx = sam(ms,Fused_image)
 
 ; q4n exnd: 0.8520 / 0.88 (con ENVI)
-; Scc: 0.843  / 0.76 (Con ENVI)
-; sam: 1.7041 
+; Scc: 0.843  / 0.89 (Con ENVI)
+; sam: 1.7041 / 1.38 (Con ENVI)
 
 end
