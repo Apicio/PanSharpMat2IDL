@@ -34,7 +34,7 @@ H1 = (dblarr(dim1,dim1)+1)*N;
 H0_1 = dblarr(dim2,dim1)
 H0_2 = dblarr(dim1,dim2)
 H0_3 = dblarr(dim2,dim2)
-H = [[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
+H = N*[[H1, H0_1, H1],[H0_2, H0_3, H0_2],[H1, H0_1, H1]] ; Filtro
  
 transformed_UVIMAGE_RIC = transformed_UVIMAGE*H ;prodotto elemento per elemento
 transformed_BLUIMAGE_RIC = transformed_BLUIMAGE*H
@@ -49,7 +49,6 @@ GREENIMAGERIC = REAL_PART(fft(transformed_GREENIMAGE_RIC, 1))
 im = IMAGE(GREENIMAGERIC)
 REDIMAGERIC = REAL_PART(fft(transformed_REDIMAGE_RIC, 1)) 
 im = IMAGE(REDIMAGERIC)
-
 
 print, mean(UVIMAGERIC)
 print, mean(BLUIMAGERIC)
