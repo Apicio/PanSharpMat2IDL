@@ -10,7 +10,7 @@ dim_ms_orig = size(IM2CROPMS1P,/dimension)  ;256*256
 dim_pan = size(IM1CROPPAN,/dimension)  ;768*768
 MS = DBLARR(dim_ms_orig(0),dim_ms_orig(1),NBands) ;256*256*4
 PAN = DBLARR(dim_pan(0),dim_pan(1)) ;768*768
-MTF_NyqMS =  [0.29,0.29, 0.28, 0.30]
+MTF_NyqMS =  [0.28,0.29, 0.29, 0.30]
 MTF_NyqPAN =  0.15
 
 ;Serve MS NON interpolata (per il confronto finale).
@@ -42,10 +42,10 @@ Degrad_MS(*,*,1) = sresize(Degrad_MS(*,*,1),ratio)
 Degrad_MS(*,*,2) = sresize(Degrad_MS(*,*,2),ratio)
 Degrad_MS(*,*,3) = sresize(Degrad_MS(*,*,3),ratio)
 
-Degrad_MS(*,*,0) = fresize(Degrad_MS(*,*,0),ratio)
-Degrad_MS(*,*,1) = fresize(Degrad_MS(*,*,1),ratio)
-Degrad_MS(*,*,2) = fresize(Degrad_MS(*,*,2),ratio)
-Degrad_MS(*,*,3) = fresize(Degrad_MS(*,*,3),ratio)
+;Degrad_MS(*,*,0) = fresize(Degrad_MS(*,*,0),ratio)
+;Degrad_MS(*,*,1) = fresize(Degrad_MS(*,*,1),ratio)
+;Degrad_MS(*,*,2) = fresize(Degrad_MS(*,*,2),ratio)
+;Degrad_MS(*,*,3) = fresize(Degrad_MS(*,*,3),ratio)
 
 ; Effettuo la valutazione attraverso gli Indici di Qualità prima di tutto prendendo in considerazione la MS
 ; Interpolata e la Ground Truth, dopodiché farò lo stesso tra l'immagine Fusa e la Ground Truth
@@ -58,6 +58,11 @@ print, q4
 print, scc
 print, samidx
 
+; RISULATO CONFRONTO
+
+; q4n exnd:  0.357454
+; Scc:  0.052128826
+; sam: 2.6590806
 
 
 ; Blurring dell'immagine PAN (che non ha bisogno di un resize)
@@ -84,9 +89,9 @@ print, samidx
 
 ; EFFETTUANDO L'INTERPOLAZIONE DI TIPO FREQUENZIALE:
 
-; q4n exnd: 0.7759 / 0.88 (con ENVI)
-; Scc: 0.7233  / 0.89 (Con ENVI)
-; sam: 1.7210 / 1.38 (Con ENVI)
+; q4n exnd: 0.838045 / 0.88 (con ENVI)
+; Scc: 0.83121329  / 0.89 (Con ENVI)
+; sam: 1.9163831 / 1.38 (Con ENVI)
 
 ; EFFETTUANDO IL PROCESSO DI PANSHARPENING ATTRAVERSO ENVI:
 
