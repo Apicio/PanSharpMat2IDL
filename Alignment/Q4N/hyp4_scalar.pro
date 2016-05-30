@@ -21,7 +21,7 @@ function hyp4_scalar, v1, v2
       z3=LONG(v2(3,*))
   sc(0,*)=w0*z0+w1*z1+w2*z2+w3*z3  ;vettore colonna r-->r*r=r  i*i=r   j*j=r  k*k=r
   sc(1,*)=w1*z0-w0*z1+w3*z2-w2*z3  ;vettore colonna i-->i*r=i  r*i=-i  k*j=i  j*k=-i
-  sc(2,*)=w2*z0-w0*z2+w1*z3-w3*z1  ;vettore colonna j-->j*r=i  r*j=-1  k*j=i  j*k=-i
+  sc(2,*)=w2*z0-w0*z2+w1*z3-w3*z1  ;vettore colonna j-->j*r=j  r*j=-j  i*k=j  k*i=-j
   sc(3,*)=w3*z0-w0*z3+w2*z1-w1*z2  ;vettore colonna k-->k*r=k  r*k=-k  j*i=k  i*j=-k
   end
 endcase
