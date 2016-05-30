@@ -48,10 +48,10 @@ function q4n_extend, x_in, y_in, block=block
   for i = 0,L2f-1 do begin
     for j = 0,L1f-1 do begin
 
-      x_ref=transpose(reform(x[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ; x_ref sarà una matrice bidimensionale N(=block*block) x N.bande
-      y_ref=transpose(reform(y[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ;
+      x_ref=transpose(reform(x[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ; x_ref sarà una matrice bidimensionale (r:block*block) x (c:n.bande)
+      y_ref=transpose(reform(y[j:j+Block-1,i:i+Block-1,*],Block^2,4)) ; sulle colonne ci sarà l'iesima banda, sulle righe gli elementi della finestra
       x_ref_size=size(x_ref)
-      x_mean=mean(x_ref,DIMENSION=2) ;equivale a x_mean=[mean(x[*,*,0]),mean(x[*,*,1]),mean(x[*,*,2])] ;vettore 1x N.bande
+      x_mean=mean(x_ref,DIMENSION=2) ; media per banda; equivale a x_mean=[mean(x[*,*,0]),mean(x[*,*,1]),mean(x[*,*,2])] ;vettore 1x n.bande
       y_mean=mean(y_ref,DIMENSION=2)
       
       mz1=norm(x_mean); ;scalare
@@ -60,7 +60,7 @@ function q4n_extend, x_in, y_in, block=block
       ;(indgen(1,(Finish-Start+1)^2)*0+1)=vettore di tutti 1; vettore N*1, a cui viene fatto un prodotto matriciale con la media di x(vettore 1*nBande)
       ;la seconda istruzione crea una matrice N*nBande in cui c'è la media(iesima) per ogni colonna;
       ;al fine poter sottrarre alla matrice originale la media per ogni banda
-      e1=x_ref-(indgen(1,x_ref_size(2))*0+1)##x_mean ;;fixed
+      e1=x_ref-(indgen(1,x_ref_size(2))*0+1)##x_mean ;;fixed | m*n n*p =m*p
       e2=y_ref-(indgen(1,x_ref_size(2))*0+1)##y_mean
 
       sz1=mean(hyp4_scalar(e1)) ;varianzaX=media del vettore[(x- Mu)*(x-Mu)]
