@@ -42,6 +42,11 @@ Degrad_MS(*,*,1) = sresize(Degrad_MS(*,*,1),ratio)
 Degrad_MS(*,*,2) = sresize(Degrad_MS(*,*,2),ratio)
 Degrad_MS(*,*,3) = sresize(Degrad_MS(*,*,3),ratio)
 
+Degrad_MS(*,*,0) = fresize(Degrad_MS(*,*,0),ratio)
+Degrad_MS(*,*,1) = fresize(Degrad_MS(*,*,1),ratio)
+Degrad_MS(*,*,2) = fresize(Degrad_MS(*,*,2),ratio)
+Degrad_MS(*,*,3) = fresize(Degrad_MS(*,*,3),ratio)
+
 ; Effettuo la valutazione attraverso gli Indici di Qualità prima di tutto prendendo in considerazione la MS
 ; Interpolata e la Ground Truth, dopodiché farò lo stesso tra l'immagine Fusa e la Ground Truth
 q4 = q4n_extend(MS,Degrad_MS)
@@ -69,10 +74,24 @@ samidx = sam(ms,Fused_image)
 
 print, q4
 print, scc
-print, smaidx
+print, samidx
+
+; EFFETTUANDO L'INTERPOLAZIONE DI TIPO SPAZIALE:
 
 ; q4n exnd: 0.8520 / 0.88 (con ENVI)
 ; Scc: 0.843  / 0.89 (Con ENVI)
 ; sam: 1.7041 / 1.38 (Con ENVI)
+
+; EFFETTUANDO L'INTERPOLAZIONE DI TIPO FREQUENZIALE:
+
+; q4n exnd: 0.7759 / 0.88 (con ENVI)
+; Scc: 0.7233  / 0.89 (Con ENVI)
+; sam: 1.7210 / 1.38 (Con ENVI)
+
+; EFFETTUANDO IL PROCESSO DI PANSHARPENING ATTRAVERSO ENVI:
+
+; q4n exnd: 0.88
+; Scc: 0.89
+; sam: 1.38
 
 end
