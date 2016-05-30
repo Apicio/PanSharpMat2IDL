@@ -10,7 +10,7 @@ dim_ms_orig = size(IM2CROPMS1P,/dimension)  ;256*256
 dim_pan = size(IM1CROPPAN,/dimension)  ;768*768
 MS = DBLARR(dim_ms_orig(0),dim_ms_orig(1),NBands) ;256*256*4
 PAN = DBLARR(dim_pan(0),dim_pan(1)) ;768*768
-MTF_NyqMS =  [0.28,0.29, 0.29, 0.30]
+MTF_NyqMS =  [0.29,0.29, 0.28, 0.30]
 MTF_NyqPAN =  0.15
 
 ;Serve MS NON interpolata (per il confronto finale).
