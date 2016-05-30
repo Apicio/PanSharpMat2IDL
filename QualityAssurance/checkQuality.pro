@@ -42,6 +42,19 @@ Degrad_MS(*,*,1) = sresize(Degrad_MS(*,*,1),ratio)
 Degrad_MS(*,*,2) = sresize(Degrad_MS(*,*,2),ratio)
 Degrad_MS(*,*,3) = sresize(Degrad_MS(*,*,3),ratio)
 
+; Effettuo la valutazione attraverso gli Indici di Qualità prima di tutto prendendo in considerazione la MS
+; Interpolata e la Ground Truth, dopodiché farò lo stesso tra l'immagine Fusa e la Ground Truth
+q4 = q4n_extend(MS,Degrad_MS)
+scc = scc_index(MS,Degrad_MS)
+samidx = sam(ms,Degrad_MS)
+
+
+print, q4
+print, scc
+print, samidx
+
+
+
 ; Blurring dell'immagine PAN (che non ha bisogno di un resize)
 Degrad_PAN = Degrad_PAN(0:*:ratio,0:*:ratio)
 
@@ -53,6 +66,10 @@ Fused_Image = gs2_glp(Degrad_PAN,Degrad_MS,ratio)
 q4 = q4n_extend(Fused_image,MS)
 scc = scc_index(MS,Fused_image)
 samidx = sam(ms,Fused_image)
+
+print, q4
+print, scc
+print, smaidx
 
 ; q4n exnd: 0.8520 / 0.88 (con ENVI)
 ; Scc: 0.843  / 0.89 (Con ENVI)
