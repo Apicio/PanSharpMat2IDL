@@ -1,8 +1,18 @@
 @paths.pro
 HDFID = hdf_sd_start(PATH_TO_DB)
 hdf_sd_fileinfo, HDFID, nvars, ngatts
+
+;Lettura attributi globali
 result = HDF_SD_ATTLIST( HDFID, nvars,  /global)
-varnames=NomiVariabiliHDF(hdfid)
+index = HDF_SD_ATTRFIND(hdfid,result.ATTNAMES[0])
+HDF_SD_ATTRINFO, hdfid, index,data=ratio
+index = HDF_SD_ATTRFIND(hdfid,result.ATTNAMES[1])
+HDF_SD_ATTRINFO, hdfid, index,data=MTF_NyqMS
+index = HDF_SD_ATTRFIND(hdfid,result.ATTNAMES[2])
+HDF_SD_ATTRINFO, hdfid, index,data=MTF_NyqPAN
+
+
+varnames = NomiVariabiliHDF(hdfid)
 cutDim = [256*3, 256*3]
 startCoords = [1401,5202]
 

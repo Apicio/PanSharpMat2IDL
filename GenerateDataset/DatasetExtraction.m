@@ -21,8 +21,8 @@ ms3 = GEOTIFF_READ(path5); % ROSSO
 %
 sdID = sd.start('dataset.hdf','create');
 sd.setAttr(sdID,'ratio',3);
-sd.setAttr(sdID,'MTF_Nyq',[0.28,0.29, 0.29, 0.30]);
-
+sd.setAttr(sdID,'MTF_NyqMS',[0.28,0.29, 0.29, 0.30]);
+sd.setAttr(sdID,'MTF_NyqPAN',0.15);
 
 %PAN_SDS1
 ds_name = 'PAN_spatial_coords'; ds_type = 'double'; toWrite = [pan.x,pan.y]; ds_dims = size(toWrite);
